@@ -25,7 +25,7 @@
     },
   "scripts": {
       "test": [
-        "./vendor/bin/phpunit --testdox"
+        "./vendor/bin/phpunit"
       ]
     }
 }
