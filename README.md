@@ -193,5 +193,8 @@ You can build and run the container with:
 user@localmachine state_machine % docker-compose up -d --build
 ```
 
+I also had a look at the call stack and memory usage of the xdebug profiler for the examples.php file:
+![phpstorm-profiler.png](assets/phpstorm-profiler.png)
+
 I took the time to integrate this module into a Laravel instance to ensure compatibility. 
 You can find a summary of the result in the [EXAMPLE.md](EXAMPLE.md) document.

@@ -3,6 +3,7 @@
 composer.lock
 /coverage
 /vendor
+/cachegrind
 /.idea
 /phpunit.xml.dist.bak
 .env
