@@ -1,6 +1,6 @@
 <?php
 
-namespace unit\builder;
+namespace Tests\unit\builder;
 
 use cjohnson\factory\StateMachine;
 use PHPUnit\Framework\Attributes\CoversClass;

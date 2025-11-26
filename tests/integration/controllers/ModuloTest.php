@@ -1,6 +1,6 @@
 <?php
 
-namespace integration\controllers;
+namespace Tests\integration\controllers;
 
 use cjohnson\exercises\ModuloExample;
 use PHPUnit\Framework\Attributes\CoversClass;

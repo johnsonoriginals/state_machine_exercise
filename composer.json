@@ -15,17 +15,24 @@
         }
     ],
     "license": "MIT",
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    },
     "require": {
+        "php": ">=8.1",
         "psr/log": "^3.0",
         "monolog/monolog": "^3.9"
     },
     "autoload": {
-        "psr-0": { "cjohnson\\": "src/" },
-        "psr-4": { "cjohnson\\": "src/", "Tests\\": "tests/" }
+        "psr-4": { "cjohnson\\": "src/" }
     },
-  "scripts": {
-      "test": [
-        "./vendor/bin/phpunit"
-      ]
+    "autoload-dev": {
+        "psr-4": { "Tests\\": "tests/" }
+    },
+    "scripts": {
+        "test": [
+          "./vendor/bin/phpunit"
+        ]
     }
 }

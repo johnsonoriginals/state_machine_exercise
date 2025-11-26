@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\unit\Validators;
+namespace Tests\unit\validators;
 
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
