@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: [8.1, 8.2, 8.3]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v4
+        with:
+          php-version: ${{ matrix.php }}
+          coverage: xdebug
+
+      - name: Validate composer.json
+        run: composer validate --no-check-all --strict
+
+      - name: Install dependencies
+        run: composer install --no-interaction --prefer-dist
+
+      - name: Run static analysis (phpstan)
+        run: composer run analyse || (composer require --dev phpstan/phpstan && composer run analyse)
+
+      - name: Run tests
+        run: composer test -- --colors=never --no-coverage || vendor/bin/phpunit --colors=never
+
+      - name: Upload coverage (optional)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: build/logs || coverage.xml
