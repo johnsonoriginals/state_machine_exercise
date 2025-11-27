@@ -1,6 +1,5 @@
 .phpunit.result.cache
 .phpunit.xml.dist.bak
-composer.lock
 /coverage
 /vendor
 /cachegrind
