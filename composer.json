@@ -2,8 +2,9 @@
     "name": "cjohnson/state_machine",
     "description": "a PHP state machine library",
     "require-dev": {
-        "phpunit/phpunit": "^12.4",
+        "friendsofphp/php-cs-fixer": "^3.90",
         "phpstan/phpstan": "^2.1",
+        "phpunit/phpunit": "^12.4",
         "squizlabs/php_codesniffer": "^4.0"
     },
     "authors": [
@@ -14,6 +15,7 @@
     ],
     "license": "MIT",
     "type": "library",
+    "version": "2.9.2",
     "config": {
         "optimize-autoloader": true,
         "sort-packages": true
@@ -32,7 +34,7 @@
     },
     "scripts": {
         "test": "phpunit --colors=always",
-        "cs-check": "vendor/bin/phpcs --standard=PSR12 src/ tests",
+        "cs-check": "vendor/bin/phpcs --standard=PSR12 src/ tests/",
         "cs-fix": "vendor/bin/phpcbf --standard=PSR12 src tests",
         "stan": "vendor/bin/phpstan analyse -c phpstan.neon",
         "analyse": "vendor/bin/phpcs --standard=PSR12 src/ tests && vendor/bin/phpstan analyse -c phpstan.neon"

@@ -54,7 +54,6 @@ class StateMachineConfig implements MachineConfigurationContract
      */
     protected string $currentState;
 
-
     /**
      * Constructor
      *
