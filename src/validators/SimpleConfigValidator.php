@@ -77,7 +77,7 @@ class SimpleConfigValidator
     protected function validateStates(array $states): bool
     {
 
-        if (count($states) <= self::MINIMUM_STATES) {
+        if (count($states) < self::MINIMUM_STATES) {
             return false;
         }
 
@@ -96,7 +96,7 @@ class SimpleConfigValidator
      */
     protected function validateFinalStates(array $finalStates, array $states): bool
     {
-        if (count($finalStates) <= self::MINIMUM_STATES) {
+        if (count($finalStates) < self::MINIMUM_STATES) {
             return false;
         }
 

@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace tests\unit\validators;
 
+use cjohnson\contracts\MachineConfigurationContract;
 use PHPUnit\Framework\Attributes\CoversClass;
 use PHPUnit\Framework\TestCase;
 use cjohnson\validators\SimpleConfigValidator;
-use cjohnson\factory\StateMachineConfig;
 
 /**
  * Class SimpleConfigValidatorTest
@@ -23,7 +23,7 @@ final class SimpleConfigValidatorTest extends TestCase
     public function testValidateReturnsTrueForValidConfig(): void
     {
         // Arrange.
-        $config = $this->createMock(StateMachineConfig::class);
+        $config = $this->createMock(MachineConfigurationContract::class);
         $config->method('getStates')->willReturn(['s1', 's2']);
         $config->method('getFinalStates')->willReturn(['s1', 's2']);
         $config->method('getAlphabet')->willReturn(['a', 'b']);
@@ -31,11 +31,11 @@ final class SimpleConfigValidatorTest extends TestCase
         $config->method('getDefaultState')->willReturn('s1');
 
         // Act.
-        $validator = new SimpleConfigValidator();
+        $validatorUnderTest = new SimpleConfigValidator();
 
         // Assert.
-        $this->assertInstanceOf(SimpleConfigValidator::class, $validator);
-        $this->assertTrue($validator->validate($config));
+        $this->assertInstanceOf(SimpleConfigValidator::class, $validatorUnderTest);
+        $this->assertTrue($validatorUnderTest->validate($config));
     }
 
     /**
@@ -46,7 +46,7 @@ final class SimpleConfigValidatorTest extends TestCase
     public function testValidateReturnsFalseForMissingStates(): void
     {
         // Arrange.
-        $config = $this->createMock(StateMachineConfig::class);
+        $config = $this->createMock(MachineConfigurationContract::class);
         $config->method('getStates')->willReturn([]); // invalid: fewer than MINIMUM_STATES
         $config->method('getFinalStates')->willReturn([]);
         $config->method('getAlphabet')->willReturn([]);
@@ -54,11 +54,11 @@ final class SimpleConfigValidatorTest extends TestCase
         $config->method('getDefaultState')->willReturn('');
 
         // Act.
-        $validator = new SimpleConfigValidator();
+        $validatorUnderTest = new SimpleConfigValidator();
 
         // Assert.
-        $this->assertInstanceOf(SimpleConfigValidator::class, $validator);
-        $this->assertFalse($validator->validate($config));
+        $this->assertInstanceOf(SimpleConfigValidator::class, $validatorUnderTest);
+        $this->assertFalse($validatorUnderTest->validate($config));
     }
 
     /**
@@ -69,7 +69,7 @@ final class SimpleConfigValidatorTest extends TestCase
     public function testValidateReturnsFalseWhenFinalStatesNotSubsetOfStates(): void
     {
         // Arrange.
-        $config = $this->createMock(StateMachineConfig::class);
+        $config = $this->createMock(MachineConfigurationContract::class);
         $config->method('getStates')->willReturn(['s1', 's2']);
         $config->method('getFinalStates')->willReturn(['s1', 'unknown']); // 'unknown' not in states
         $config->method('getAlphabet')->willReturn(['a', 'b']);
@@ -77,10 +77,10 @@ final class SimpleConfigValidatorTest extends TestCase
         $config->method('getDefaultState')->willReturn('s1');
 
         // Act.
-        $validator = new SimpleConfigValidator();
+        $validatorUnderTest = new SimpleConfigValidator();
 
         // Assert.
-        $this->assertFalse($validator->validate($config));
+        $this->assertFalse($validatorUnderTest->validate($config));
     }
 
     /**
@@ -91,7 +91,7 @@ final class SimpleConfigValidatorTest extends TestCase
     public function testValidateReturnsFalseForInvalidTransitionsStructure(): void
     {
         // Arrange.
-        $config = $this->createMock(StateMachineConfig::class);
+        $config = $this->createMock(MachineConfigurationContract::class);
         $config->method('getStates')->willReturn(['s1', 's2']);
         $config->method('getFinalStates')->willReturn(['s1', 's2']);
         $config->method('getAlphabet')->willReturn(['a', 'b']);
@@ -100,10 +100,10 @@ final class SimpleConfigValidatorTest extends TestCase
         $config->method('getDefaultState')->willReturn('s1');
 
         // Act.
-        $validator = new SimpleConfigValidator();
+        $validatorUnderTest = new SimpleConfigValidator();
 
         // Assert.
-        $this->assertFalse($validator->validate($config));
+        $this->assertFalse($validatorUnderTest->validate($config));
     }
 
     /**
@@ -114,7 +114,7 @@ final class SimpleConfigValidatorTest extends TestCase
     public function testValidateReturnsFalseForDefaultStateNotInStates(): void
     {
         // Arrange.
-        $config = $this->createMock(StateMachineConfig::class);
+        $config = $this->createMock(MachineConfigurationContract::class);
         $config->method('getStates')->willReturn(['s1', 's2']);
         $config->method('getFinalStates')->willReturn(['s1', 's2']);
         $config->method('getAlphabet')->willReturn(['a', 'b']);
@@ -122,9 +122,9 @@ final class SimpleConfigValidatorTest extends TestCase
         $config->method('getDefaultState')->willReturn('unknown'); // not in states
 
         // Act.
-        $validator = new SimpleConfigValidator();
+        $validatorUnderTest = new SimpleConfigValidator();
 
         // Assert.
-        $this->assertFalse($validator->validate($config));
+        $this->assertFalse($validatorUnderTest->validate($config));
     }
 }

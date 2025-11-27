@@ -9,8 +9,8 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - .:/var/www/html:./src
-      - ./vendor:/var/www/html/vendor:./src/vendor
+      - .:/var/www/html:delegated
+      - ./vendor:/var/www/html/vendor:delegated
     environment:
       COMPOSER_ALLOW_SUPERUSER: "1"
       XDEBUG_MODE: "develop,debug"
