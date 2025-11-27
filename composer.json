@@ -20,6 +20,7 @@
         "optimize-autoloader": true,
         "sort-packages": true
     },
+    "prefer-stable": true,
     "require": {
         "php": ">=8.1",
         "psr/log": "^3.0",
@@ -32,10 +33,10 @@
         "psr-4": { "tests\\": "tests/" }
     },
     "scripts": {
-        "test" : "vendor/bin/phpunit --colors=always",
+        "test": "phpunit --colors=always",
         "cs-check": "vendor/bin/phpcs --standard=PSR12 src/ tests",
         "cs-fix": "vendor/bin/phpcbf --standard=PSR12 src tests",
         "stan": "vendor/bin/phpstan analyse -c phpstan.neon src tests",
-        "analyse": "composer cs-check && composer stan"
+        "analyse": "vendor/bin/phpcs --standard=PSR12 src/ tests && vendor/bin/phpstan analyse -c phpstan.neon src tests"
     }
 }

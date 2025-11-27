@@ -187,10 +187,7 @@ A sample code coverage report from PHPUnit is shown below:
 
 If you want to check the code quality with an included script, run:
 ```bash
-user@container:/var/www/html# ./scripts/cs.sh 
-[1/3] php lint            OK!
-[2/3] code sniffer        OK!
-[3/3] phpstan             OK!
+user@container:/var/www/html#  composer run-script analyze
 ```
 
 I've included an example Dockerfile and docker-compose.yml file. 
