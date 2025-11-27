@@ -14,7 +14,7 @@ class StateMachine
     /**
      * Class property for the possible states of the machine.
      *
-     * @var array<string>
+     * @var array<int|string>
      */
     protected array $states = [];
 
@@ -50,9 +50,9 @@ class StateMachine
     /**
      * Class property for the current state of the machine.
      *
-     * @var string
+     * @var mixed
      */
-    protected string $currentState;
+    protected mixed $currentState = "";
 
     /**
      * Default constructor.
@@ -87,10 +87,10 @@ class StateMachine
      *
      * @param int $inputState
      *   The input state to transition to.
-     * @return string
+     * @return mixed
      *   The new current state after the transition.
      */
-    public function transitionTo(int $inputState): string
+    public function transitionTo(int $inputState): mixed
     {
         foreach ($this->stateTransitions as $transition) {
             if ($transition[0] === $this->getCurrentState() && $transition[1] === $inputState) {
@@ -121,11 +121,11 @@ class StateMachine
     /**
      * Sets the current state of the machine.
      *
-     * @param string $state
+     * @param mixed $state
      *   The state to set as the current state.
      * @return void
      */
-    public function setCurrentState(string $state): void
+    public function setCurrentState(mixed $state): void
     {
         $this->currentState = $state;
     }

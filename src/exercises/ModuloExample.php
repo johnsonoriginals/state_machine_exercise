@@ -107,11 +107,15 @@ class ModuloExample
         $machineConfig = new StateMachineConfig($config);
         $builtMachine = (new StateMachineFactory($machineConfig, $logger))->build();
         $characters = str_split($number);
-        foreach ($characters as $character) {
-            $builtMachine->transitionTo((int)$character);
+        if ($builtMachine) {
+            foreach ($characters as $character) {
+                $builtMachine->transitionTo((int)$character);
+            }
+            $currentState = $builtMachine->getCurrentState();
+        } else {
+            // If the machine could not be built, default to state S0.
+            $currentState = 'S0';
         }
-
-        $currentState = $builtMachine->getCurrentState();
 
         return match ($currentState) {
             'S0' => 0,

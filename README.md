@@ -3,7 +3,7 @@
 ![state_machine.gif](assets/state_machine.gif)
 
 - Built on PHP 8.3 using Docker and PHPStorm.
-- Scanned with PHPStan level 6.
+- Scanned with PHPStan level 8.
 - Scanned with phpcs using PSR-12 standard.
 - Tested with PHPUnit.
 
@@ -70,7 +70,7 @@ if ($builtMachine) {
     echo "Failed to build machine using MachineBuilder." . PHP_EOL;
 }
 ```
-Or, as seen in the `./examples.php` file, we can run a sequence of transitions:
+Or, as seen in the `./examples/examples.php` file, we can run a sequence of transitions:
 ```php
 if ($builtMachine) {
     $transitions = [1, 0, 1, 0];
@@ -131,7 +131,7 @@ input alphabet containing missing symbols, mismatched types (and so on) without 
 - PHPDoc comments are provided for all classes and methods to explain their purpose and usage.
 - Meaningful variable and method names enhance readability.
 - Logical structure and organization of the code make it easy to follow.
-- Examples are provided in the `examples.php` file to demonstrate how to use the state machine.
+- Examples are provided in the `examples/examples.php` file to demonstrate how to use the state machine.
 
 # State Machine Standard Exercise
 In the standard exercise we can create an enum representing a state machine with 

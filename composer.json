@@ -34,7 +34,7 @@
         "test": "phpunit --colors=always",
         "cs-check": "vendor/bin/phpcs --standard=PSR12 src/ tests",
         "cs-fix": "vendor/bin/phpcbf --standard=PSR12 src tests",
-        "stan": "vendor/bin/phpstan analyse -c phpstan.neon src tests",
-        "analyse": "vendor/bin/phpcs --standard=PSR12 src/ tests && vendor/bin/phpstan analyse -c phpstan.neon src tests"
+        "stan": "vendor/bin/phpstan analyse -c phpstan.neon",
+        "analyse": "vendor/bin/phpcs --standard=PSR12 src/ tests && vendor/bin/phpstan analyse -c phpstan.neon"
     }
 }

@@ -58,7 +58,7 @@ class StateMachineConfig implements MachineConfigurationContract
     /**
      * Constructor
      *
-     * @param array<string, array<int|list<int|string>|string>|string> $config
+     * @param array<string, mixed> $config
      *   The configuration for the state machine.
      */
     public function __construct(array $config)

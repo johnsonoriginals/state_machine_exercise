@@ -81,7 +81,7 @@ class StateMachineFactory
         $validationResult = $validator->validate($this->getMachineConfig());
         if ($validationResult[0] === false) {
             if ($this->logger) {
-                $this->logger->error('Configuration validation failed: ' . implode(' ', $validationResult[1]));
+                $this->logger->error('Configuration validation failed: ' . implode(' ', (array) $validationResult[1]));
             }
             return false;
         }
