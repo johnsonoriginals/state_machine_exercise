@@ -35,7 +35,7 @@ final class SimpleConfigValidatorTest extends TestCase
 
         // Assert.
         $this->assertInstanceOf(SimpleConfigValidator::class, $validatorUnderTest);
-        $this->assertTrue($validatorUnderTest->validate($config));
+        $this->assertEquals([true, []], $validatorUnderTest->validate($config));
     }
 
     /**
@@ -53,12 +53,20 @@ final class SimpleConfigValidatorTest extends TestCase
         $config->method('getTransitions')->willReturn([]);
         $config->method('getDefaultState')->willReturn('');
 
+        $reasons = [
+            'Invalid states configuration.',
+            'Invalid final states configuration.',
+            'Invalid input alphabet configuration.',
+            'Invalid transitions configuration.',
+            'Invalid default state configuration.',
+        ];
         // Act.
         $validatorUnderTest = new SimpleConfigValidator();
 
         // Assert.
         $this->assertInstanceOf(SimpleConfigValidator::class, $validatorUnderTest);
-        $this->assertFalse($validatorUnderTest->validate($config));
+
+        $this->assertEquals([false, $reasons], $validatorUnderTest->validate($config));
     }
 
     /**
@@ -76,11 +84,15 @@ final class SimpleConfigValidatorTest extends TestCase
         $config->method('getTransitions')->willReturn([['s1', 'a', 's2']]);
         $config->method('getDefaultState')->willReturn('s1');
 
+        $reasons = [
+            'Invalid final states configuration.',
+        ];
+
         // Act.
         $validatorUnderTest = new SimpleConfigValidator();
 
         // Assert.
-        $this->assertFalse($validatorUnderTest->validate($config));
+        $this->assertEquals([false, $reasons], $validatorUnderTest->validate($config));
     }
 
     /**
@@ -99,11 +111,15 @@ final class SimpleConfigValidatorTest extends TestCase
         $config->method('getTransitions')->willReturn([['s1', 'a']]);
         $config->method('getDefaultState')->willReturn('s1');
 
+        $reasons = [
+            'Invalid transitions configuration.',
+        ];
+
         // Act.
         $validatorUnderTest = new SimpleConfigValidator();
 
         // Assert.
-        $this->assertFalse($validatorUnderTest->validate($config));
+        $this->assertEquals([false, $reasons], $validatorUnderTest->validate($config));
     }
 
     /**
@@ -121,10 +137,14 @@ final class SimpleConfigValidatorTest extends TestCase
         $config->method('getTransitions')->willReturn([['s1', 'a', 's2']]);
         $config->method('getDefaultState')->willReturn('unknown'); // not in states
 
+        $reasons = [
+            'Invalid default state configuration.',
+        ];
+
         // Act.
         $validatorUnderTest = new SimpleConfigValidator();
 
         // Assert.
-        $this->assertFalse($validatorUnderTest->validate($config));
+        $this->assertEquals([false, $reasons], $validatorUnderTest->validate($config));
     }
 }

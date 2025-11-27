@@ -64,8 +64,6 @@ class StateMachineFactory
                 $this->logger->error('Invalid machine configuration provided.');
             }
             return null;
-            // TODO: confirm if exception is preferred over logging
-            // throw new \InvalidArgumentException('Invalid machine configuration provided.');
         }
 
         return $machine;
@@ -80,7 +78,14 @@ class StateMachineFactory
     protected function isConfigValid(): bool
     {
         $validator = new SimpleConfigValidator();
-        return $validator->validate($this->getMachineConfig());
+        $validationResult = $validator->validate($this->getMachineConfig());
+        if ($validationResult[0] === false) {
+            if ($this->logger) {
+                $this->logger->error('Configuration validation failed: ' . implode(' ', $validationResult[1]));
+            }
+            return false;
+        }
+        return true;
     }
 
     /**

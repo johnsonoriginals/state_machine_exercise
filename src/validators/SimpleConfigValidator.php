@@ -33,38 +33,45 @@ class SimpleConfigValidator
      *
      * @param MachineConfigurationContract  $config
      *   the state machine configuration to validate.
-     * @return bool
+     * @return array<bool, array|mixed>
      *   true if the configuration is valid, false otherwise.
      */
-    public function validate(MachineConfigurationContract $config): bool
+    public function validate(MachineConfigurationContract $config): array
     {
         $states = $config->getStates();
         $finalStates = $config->getFinalStates();
         $alphabet = $config->getAlphabet();
         $transitions = $config->getTransitions();
         $defaultState = $config->getDefaultState();
+        $result = true;
+        $messages = [];
 
         if (!$this->validateStates($states)) {
-            return false;
+            $result = false;
+            $messages[] = 'Invalid states configuration.';
         }
 
         if (!$this->validateFinalStates($finalStates, $states)) {
-            return false;
+            $result = false;
+            $messages[] = 'Invalid final states configuration.';
         }
 
         if (!$this->validateAlphabet($alphabet)) {
-            return false;
+            $result = false;
+            $messages[] = 'Invalid input alphabet configuration.';
         }
 
         if (!$this->validateTransitions($transitions)) {
-            return false;
+            $result = false;
+            $messages[] = 'Invalid transitions configuration.';
         }
 
         if (!$this->validateDefaultState($defaultState, $states)) {
-            return false;
+            $result = false;
+            $messages[] = 'Invalid default state configuration.';
         }
 
-        return true;
+        return [$result, $messages];
     }
     /**
      * Validate the states array.

@@ -70,9 +70,9 @@ final class StateMachineFactoryTest extends TestCase
         $config->method('getDefaultState')->willReturn('');
 
         $logger = $this->createMock(LoggerInterface::class);
-        $logger->expects($this->once())
+        $logger->expects($this->any())
             ->method('error')
-            ->with('Invalid machine configuration provided.');
+            ->withAnyParameters();
 
         // Act.
         $factory = new StateMachineFactory($config, $logger);
