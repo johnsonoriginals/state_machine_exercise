@@ -206,3 +206,26 @@ Exercise errata: [FSM - Modulo Three Exercise.pdf](assets/FSM%20-%20Modulo%20Thr
 Rubric: [FSM - Modulo Three Exercise Rubric.pdf](assets/FSM%20-%20Modulo%20Three%20Exercise%20Rubric.pdf)
 
 [MIT.md](MIT.md)
+
+
+# an addendum for those curious about the quirky wording and examples in the exercise requirements.
+So, if you find this exercise in the wild, you might be puzzled by the examples provided for modulo three calculations.
+
+```php
+<?php
+
+echo '110' % 3 . PHP_EOL;
+echo (int) "110" % 3 . PHP_EOL;
+echo 110 % 3 . PHP_EOL;
+echo "110" % 3 . PHP_EOL;
+echo (string) 110 % 3 . PHP_EOL;
+```
+
+```bash
+user@container:/var/www/html# php file.php
+2
+2
+2
+2
+2
+```bash
