@@ -228,4 +228,7 @@ user@container:/var/www/html# php file.php
 2
 2
 2
-```bash
+```
+
+Be sure to check with whomever gives you this exercise to be sure that it's just a toy project to see your thinking process, and not a trick question!
+(or whatever else you feel the need to clarify)
